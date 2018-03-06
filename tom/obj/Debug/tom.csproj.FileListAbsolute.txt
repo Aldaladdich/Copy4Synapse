@@ -1,0 +1,7 @@
+C:\Users\Mister\source\repos\tom\tom\bin\Debug\tom.exe.config
+C:\Users\Mister\source\repos\tom\tom\bin\Debug\tom.exe
+C:\Users\Mister\source\repos\tom\tom\bin\Debug\tom.pdb
+C:\Users\Mister\source\repos\tom\tom\obj\Debug\tom.csprojResolveAssemblyReference.cache
+C:\Users\Mister\source\repos\tom\tom\obj\Debug\tom.csproj.CoreCompileInputs.cache
+C:\Users\Mister\source\repos\tom\tom\obj\Debug\tom.exe
+C:\Users\Mister\source\repos\tom\tom\obj\Debug\tom.pdb
