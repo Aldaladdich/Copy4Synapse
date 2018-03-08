@@ -4,12 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Copy4Synapse
-{
-    class Copy4Synapse
-    {
-        static void Main()
-        {
+namespace Copy4Synapse {
+    class Copy4Synapse {
+        static void Main() {
             string source;
             string target;
             string destFile;
@@ -17,7 +14,7 @@ namespace Copy4Synapse
             string sbstr;
 		
 		// Streamreader instanziieren 
-            StreamReader path = new StreamReader("../path/Test.txt");
+            StreamReader path = new StreamReader("../path/conf.ini");
             //erste Zeile der Datei wird übersprungen
             path.ReadLine();            
 			//die zweite Zeile wird ausgelesen und in sbstr gespeichert
@@ -31,23 +28,40 @@ namespace Copy4Synapse
             sbstr = path.ReadLine();
             target = sbstr.Substring(7);
             Console.WriteLine("Der Zielpfad ist" + " " + target);
-            
-            
+        
             //prüfe ob das Quellverzeichnis vorhanden ist
-            if (System.IO.Directory.Exists(source))
-            {
+            if (System.IO.Directory.Exists(source)){
+                Console.WriteLine("Quellpfad existiert!");
+                Console.WriteLine("");
+
             	//alle dateien im Vz werden in diesem StringArray hinterlegt
                 string[] files = System.IO.Directory.GetFiles(source);
 
-                foreach (string s in files)
-                {
-                    fileName = System.IO.Path.GetFileName(s);
-                    destFile = System.IO.Path.Combine(target, fileName);
-                    System.IO.File.Copy(s, destFile, true);
+                if (System.IO.Directory.Exists(target)){
+                    Console.WriteLine("Zielpfad existiert!");
+                    Console.WriteLine("");
+
+                    foreach (string s in files){
+                        fileName = System.IO.Path.GetFileName(s);
+                        destFile = System.IO.Path.Combine(target, fileName);
+                        System.IO.File.Copy(s, destFile, true);
+                    }
+                }else{
+                    Console.WriteLine("Zielpfad existiert nicht");
+                    Console.WriteLine("");
+                    Console.WriteLine("Soll das Verzeichnis erstellt werden? Drücke <Enter> zum erstellen/ <ESC> zum abbrechen");
+                    cki = Console.ReadKey();
+					if(ConsoleKey.Enter != 0){
+                        DirectoryInfo dir = Directory.CreateDirectory(target);
+                        Console.WriteLine("Das Verzeichnis wurde erstellt am {0}.", Directory.GetCreationTime(target));
+						foreach (string s in files) {
+							fileName = System.IO.Path.GetFileName (s);
+							destFile = System.IO.Path.Combine (target, fileName);
+							System.IO.File.Copy (s, destFile, true);
+						}
+                    }
                 }
-            }
-            else
-            {
+            }else{
 
                 //falls Quellpfad nicht vorhanden gib einen Fehler aus
                 Console.WriteLine("Quellpfad existiert nicht");
