@@ -65,11 +65,13 @@ namespace Copy4Synapse {
                                     fileName = System.IO.Path.GetFileName (s);
                                     destFile = System.IO.Path.Combine (target, fileName);
                                     System.IO.File.Copy (s, destFile, true);
+									Console.WriteLine("Kopiervorgang beendet");
                                 }
                                 confirmed = response == ConsoleKey.J;
                             }else if (response == ConsoleKey.N){
                                 Console.WriteLine("Das Verzeichnis wurde nicht erstellt!");
                                 confirmed = response == ConsoleKey.N;
+								Console.WriteLine("Kopiervorgang abgebrochen");
                             }
 
 					} while (!confirmed);
@@ -81,7 +83,6 @@ namespace Copy4Synapse {
                 Console.WriteLine("Quellpfad existiert nicht");
             }
             //und ende
-            Console.WriteLine("Kopiervorgang beendet");
             Console.WriteLine("Beliebige Taste zum Schließen");
             Console.ReadKey();
         }
