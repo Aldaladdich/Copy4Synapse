@@ -1,3 +1,0 @@
-[Path]
-source=D:\Test\
-target=D:\Test2\
