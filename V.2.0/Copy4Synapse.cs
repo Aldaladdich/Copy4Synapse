@@ -29,13 +29,19 @@ namespace Copy4Synapse {
         
             //prüfe ob das Quellverzeichnis vorhanden ist
             if (System.IO.Directory.Exists(source)){
+				Console.WriteLine("");
+				Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Quellpfad existiert!");
+				Console.ResetColor();
                 Console.WriteLine("");
             	//alle dateien im Vz werden in diesem StringArray hinterlegt
                 string[] files = System.IO.Directory.GetFiles(source);
 
                 if (System.IO.Directory.Exists(target)){
+					Console.WriteLine("");
+					Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Zielpfad existiert!");
+					Console.ResetColor();
                     Console.WriteLine("");
 
                     foreach (string s in files){
@@ -44,7 +50,10 @@ namespace Copy4Synapse {
                         System.IO.File.Copy(s, destFile, true);
                     }
                 }else{
-                    Console.WriteLine("Zielpfad existiert nicht");
+					Console.WriteLine("");
+					Console.ForegroundColor = ConsoleColor.Red;
+					Console.WriteLine("Der Zielpfad ("+ target + ") " + " existiert nicht");
+					Console.ResetColor();
                     Console.WriteLine("");
                     do {
 
@@ -60,29 +69,41 @@ namespace Copy4Synapse {
 
                             if (response == ConsoleKey.J){
                                 DirectoryInfo dir = Directory.CreateDirectory(target);
+								Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Das Verzeichnis wurde erstellt am {0}.", Directory.GetCreationTime(target));
-                                foreach (string s in files) {
+								
+								foreach (string s in files) {
                                     fileName = System.IO.Path.GetFileName (s);
                                     destFile = System.IO.Path.Combine (target, fileName);
                                     System.IO.File.Copy (s, destFile, true);
-									Console.WriteLine("Kopiervorgang beendet");
                                 }
+							Console.ResetColor();
                                 confirmed = response == ConsoleKey.J;
                             }else if (response == ConsoleKey.N){
                                 Console.WriteLine("Das Verzeichnis wurde nicht erstellt!");
-                                confirmed = response == ConsoleKey.N;
+								confirmed = response == ConsoleKey.N;
+								Console.ForegroundColor = ConsoleColor.Red;
 								Console.WriteLine("Kopiervorgang abgebrochen");
+								Console.ResetColor();
                             }
 
 					} while (!confirmed);
-					//Console.ReadLine();
-                    //Console.ReadKey().Key	
                 }
+				if (System.IO.Directory.Exists (target) && System.IO.Directory.Exists (source)) {
+					Console.ForegroundColor = ConsoleColor.Green;
+					Console.WriteLine ("Kopiervorgang beendet");
+					Console.ResetColor (); 
+				}
             }else{
                 //falls Quellpfad nicht vorhanden gib einen Fehler aus
-                Console.WriteLine("Quellpfad existiert nicht");
+				Console.WriteLine ("");
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Der Quellpfad (" + source + ") " + " existiert nicht!");
+				Console.ResetColor();
+
             }
             //und ende
+			Console.WriteLine ("");
             Console.WriteLine("Beliebige Taste zum Schließen");
             Console.ReadKey();
         }
